@@ -124,10 +124,11 @@ android:scaleType="centerCrop"
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:text="10"
         android:textSize="16sp"
-        android:id="@+id/PriceTextView"
-        android:layout_marginTop="16dp"
+        android:id="@+id/OrderSummeryTextView"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="16dp"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"

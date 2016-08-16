@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void submitOrder(View view)
     {
-      /*  display(numberOfCoffee);
-        displayPrice(numberOfCoffee * price);*/
+
         int price = calculatePrice();
         //String printMsg = ;
         displayMsg(createOrderMethod());
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public String createOrderMethod()
     {
-        String printMsg = " Name : Rohini Deshmane \n Quantity = "+ numberOfCoffee+ "\n Price $" + price + "\n Thank you !!!!";
+        String printMsg = " Name : Rohini Deshmane \n Quantity = "+ numberOfCoffee+ "\n Price $" + calculatePrice() + "\n Thank you !!!!";
         return printMsg;
     }
     /*
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayMsg(String msg)
     {
-        TextView priceTextView = (TextView)findViewById(R.id.PriceTextView);
+        TextView priceTextView = (TextView)findViewById(R.id.OrderSummeryTextView);
         priceTextView.setText(msg);
     }
 
@@ -80,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void incrementQuantity(View view)
     {
-        if(numberOfCoffee >= 1 )
+        if(numberOfCoffee >= 0 )
         {
             numberOfCoffee++;
             displayQuantity(numberOfCoffee);
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrementQuantity(View view)
     {
-        if(numberOfCoffee > 1)
+        if(numberOfCoffee > 0)
         {
             numberOfCoffee--;
             displayQuantity(numberOfCoffee);
