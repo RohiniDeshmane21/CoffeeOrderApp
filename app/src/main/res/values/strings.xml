@@ -1,3 +1,13 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">Practise_App</string>
+    <string name="wCream" translatable="false">Whipped Cream</string>
+    <string name="toppings" translatable="false">Toppings</string>
+    <string name="chocolate" translatable="false">Chocolate</string>
+    <string name="quantity" translatable="false">Quantity</string>
+    <string name="name" translatable="false">Name</string>
+    <string name="order_summery_name"> Name : <xliff:g id = "name" example = "Amy">%s</xliff:g></string>
+    <string name="order_summery_added_choco">\n Added Whipeed Coffee ?   : <xliff:g id = "trueorfalse" example = "Amy">%b</xliff:g></string>
+    <string name="order_summery_added_chocolate">\n Added Chocolate ?   : <xliff:g id = "trueorfalse" example = "Amy">%b</xliff:g></string>
+    <string name="order_summery_quantity">\n Quantity ?   : <xliff:g id = "trueorfalse" example = "Amy">%d</xliff:g></string>
+    <string name="order_summery_price">\n Price ?   : <xliff:g id = "trueorfalse" example = "Amy">%d</xliff:g></string>
 </resources>

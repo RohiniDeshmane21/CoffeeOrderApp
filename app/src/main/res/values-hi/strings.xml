@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Practise_App</string>
+    <string name="chocolate" translatable="false">चॉकलेट</string>
+    <string name="name" translatable="false">नाव</string>
+</resources>

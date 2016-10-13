@@ -1,8 +1,12 @@
 package com.packtbpub.practise_app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,12 +28,59 @@ public class MainActivity extends AppCompatActivity {
     /*
     call when click on order button
      */
+    boolean checkboxStatus;
+    boolean chocolateStatus;
+
     public void submitOrder(View view)
     {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Coffee Order");
 
-        int price = calculatePrice();
-        //String printMsg = ;
-        displayMsg(createOrderMethod());
+        EditText name = (EditText)findViewById(R.id.edittextName);
+        String nameString = name.getText().toString();
+
+        CheckBox cbox = (CheckBox)findViewById(R.id.checkBox);
+        if (cbox.isChecked()) {
+            checkboxStatus = true;
+        } else {
+            checkboxStatus = false;
+        }
+
+        CheckBox chocolatebox = (CheckBox)findViewById(R.id.checkBoxChoclate);
+        if (chocolatebox.isChecked()) {
+            chocolateStatus = true;
+        } else {
+            chocolateStatus = false;
+        }
+
+        String printMsg = createOrderMethod(checkboxStatus, chocolateStatus,nameString);
+        intent.putExtra(Intent.EXTRA_TEXT, printMsg);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
+       /* int price = calculatePrice();
+
+        CheckBox cbox = (CheckBox)findViewById(R.id.checkBox);
+        if (cbox.isChecked()) {
+            checkboxStatus = true;
+        } else {
+            checkboxStatus = false;
+        }
+
+        CheckBox chocolatebox = (CheckBox)findViewById(R.id.checkBoxChoclate);
+        if (chocolatebox.isChecked()) {
+            chocolateStatus = true;
+        } else {
+            chocolateStatus = false;
+        }
+
+        EditText name = (EditText)findViewById(R.id.edittextName);
+        String nameString = name.getText().toString();
+        displayMsg(createOrderMethod(checkboxStatus,chocolateStatus,nameString));*/
+
     }
 
     /*
@@ -37,15 +88,38 @@ public class MainActivity extends AppCompatActivity {
      */
     public int calculatePrice()
     {
-        return numberOfCoffee * price;
+        int cream = 0;
+        int choco = 0;
+        if(checkboxStatus == true)
+        {
+            cream = 1;
+        }
+        else if(chocolateStatus == true)
+        {
+            choco =2;
+        }
+        return numberOfCoffee * price + cream + choco;
     }
 
     /*show some order summery
 
      */
-    public String createOrderMethod()
+    public String createOrderMethod(boolean checkboxStatus, boolean chocolateStatus,String name)
     {
-        String printMsg = " Name : Rohini Deshmane \n Quantity = "+ numberOfCoffee+ "\n Price $" + calculatePrice() + "\n Thank you !!!!";
+        TextView orderSummery = (TextView)findViewById(R.id.textViewOrderSummery);
+        orderSummery.setText("Order Summery");
+
+        String printMsg = getString(R.string.order_summery_name, name);
+        printMsg += getString(R.string.order_summery_added_choco,checkboxStatus);
+        printMsg += getString(R.string.order_summery_added_chocolate,chocolateStatus);
+        printMsg += getString(R.string.order_summery_quantity,numberOfCoffee);
+        int price = calculatePrice();
+        printMsg += getString(R.string.order_summery_price,price);
+
+       /* printMsg += "\n Added Chocolate ?  "+ chocolateStatus;
+        printMsg += "\n Quantity = "+ numberOfCoffee;
+        printMsg += "\n Price $" + calculatePrice();
+        printMsg += "\n Thank you !!!!";*/
         return printMsg;
     }
     /*
@@ -53,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayMsg(String msg)
     {
-        TextView priceTextView = (TextView)findViewById(R.id.OrderSummeryTextView);
+        TextView priceTextView = (TextView)findViewById(R.id.textViewOrderSummery);
         priceTextView.setText(msg);
     }
 
